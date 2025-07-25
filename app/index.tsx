@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
 
@@ -29,7 +30,7 @@ const Page = () => {
       />
       <Text>{username}</Text>
       <Text>{password}</Text>
-      <Button onPress={() => console.log("t")} title="login" />
+      <Button onPress={() => router.push("/home")} title="login" />
     </View>
   );
 };

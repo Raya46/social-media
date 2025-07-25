@@ -17,7 +17,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -26,11 +26,38 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="search"
         options={{
-          title: "Explore",
+          title: "Search",
           tabBarIcon: ({ color }) => (
-            <Ionicons size={28} name="paper-plane" color={color} />
+            <Ionicons size={28} name="search" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="post"
+        options={{
+          title: "post",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="add" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="like"
+        options={{
+          title: "like",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="heart" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "profile",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="person" color={color} />
           ),
         }}
       />
