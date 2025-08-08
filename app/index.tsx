@@ -1,12 +1,20 @@
 import { useLogin } from "@/hooks/useUser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Button, Text, TextInput, View } from "react-native";
 
 const Page = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const { mutate: login, isPending } = useLogin();
+
+  const handleUserLoggedIn = async () => {
+    const userToken = await AsyncStorage.getItem("token");
+    if (userToken) {
+      router.replace("/home");
+    }
+  };
 
   const handleLogin = () => {
     try {
@@ -19,6 +27,10 @@ const Page = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    handleUserLoggedIn();
+  }, []);
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

@@ -1,10 +1,12 @@
 import PostCard from "@/components/PostCard";
 import StoryBubble from "@/components/StoryBubble";
+import { useLogout } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 const Home = () => {
+  const { mutate: logout, isPending } = useLogout();
   return (
     <ScrollView>
       <View
@@ -18,7 +20,11 @@ const Home = () => {
         <Text style={{ fontSize: 20 }}>INSTAGRAM</Text>
         <View style={{ flexDirection: "row", gap: 15 }}>
           <Ionicons name="heart" size={30} />
-          <Ionicons name="paper-plane" size={30} />
+          {isPending ? (
+            <ActivityIndicator />
+          ) : (
+            <Ionicons onPress={() => logout()} name="paper-plane" size={30} />
+          )}
         </View>
       </View>
 

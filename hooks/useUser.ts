@@ -14,16 +14,19 @@ export const useLogin = () => {
                 console.log(error);
             }
             await AsyncStorage.setItem("token",data.session?.access_token as string)
-
+            
             const {data: userData, error: userError} = await supabase
             .from("users")
             .select("*")
             .eq("id",data.user?.id)
             .single()
 
-            if(userError){
+            if(userError || !userData){
                 console.log(error);
             }
+
+            await AsyncStorage.setItem("user_id",userData.id)
+            
             return userData 
         },
         onSuccess: () => {
@@ -69,6 +72,15 @@ export const useLogout = () => {
                 console.log(error);
             }
             await AsyncStorage.removeItem("token")
+            await AsyncStorage.removeItem("user_id")
+        },
+        onSuccess: () => {
+            router.replace("/")
+        },
+        onError:async() => {
+            router.replace("/")
+            await AsyncStorage.removeItem("token")
+            await AsyncStorage.removeItem("user_id")
         }
     })
 }
