@@ -40,6 +40,10 @@ const Page = () => {
         }}
       />
       <Button onPress={handleLogin} title="login" />
+      <Button
+        onPress={() => router.push("/auth/register")}
+        title="go to register"
+      />
     </View>
   );
 };
