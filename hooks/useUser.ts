@@ -25,26 +25,35 @@ export const useLogin = () => {
                 console.log(error);
             }
             return userData 
+        },
+        onSuccess: () => {
+            router.replace("/home")
         }
     })
 }
 
 export const useRegister = () => {
     return useMutation({
-        mutationFn: async({email, username, password, profile_url}: {email:string, username:string, password:string, profile_url:string}) => {
+        mutationFn: async({email, username, password, profile_url}: 
+            {email:string, username:string, password:string, profile_url:string}) => {
             const {data,error} = await supabase.auth.signUp({
                 email:email,
                 password:password
             })
+            if(error){
+                console.log(error)
+            }
             const {data:userData, error:userError} = await supabase.from("users").insert({
                 email: data.user?.email,
                 username:username,
                 profile_url:profile_url
             })
+            if(userError){
+                console.log(userError)
+            }
         },
         onError:(error) => {
             console.log(error);
-            
         },
         onSuccess:() => {
             router.replace("/home")

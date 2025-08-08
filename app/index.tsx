@@ -1,27 +1,31 @@
+import { useLogin } from "@/hooks/useUser";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Button, Text, TextInput, View } from "react-native";
 
 const Page = () => {
-  const [username, setusername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const usernamePlaceholder = "el";
-  const passwordPlaceholder = "el123";
+  const { mutate: login, isPending } = useLogin();
 
   const handleLogin = () => {
-    if (username === usernamePlaceholder && password === passwordPlaceholder) {
-      router.push("/home");
-    } else {
-      console.warn("invalid");
+    try {
+      console.log(email, password);
+      login({
+        email: email,
+        password: password,
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Login</Text>
-      <Text>Username</Text>
+      <Text>email</Text>
       <TextInput
-        onChangeText={(text) => setusername(text)}
+        onChangeText={(text) => setemail(text)}
         style={{
           borderColor: "black",
           borderWidth: 1,
@@ -39,7 +43,11 @@ const Page = () => {
           marginBottom: 10,
         }}
       />
-      <Button onPress={handleLogin} title="login" />
+      {isPending ? (
+        <ActivityIndicator />
+      ) : (
+        <Button onPress={handleLogin} title="login" />
+      )}
       <Button
         onPress={() => router.push("/auth/register")}
         title="go to register"
