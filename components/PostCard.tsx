@@ -46,7 +46,6 @@ const PostCard = ({caption, imageUrl}:{caption:string, imageUrl:string}) => {
           marginTop: 10,
         }}
       ></View> :  <Image source={{uri:imageUrl,height:300,width:"100%"}}/>}
-     
       
       <View
         style={{
