@@ -1,5 +1,6 @@
 import PostCard from "@/components/PostCard";
 import StoryBubble from "@/components/StoryBubble";
+import { getPost } from "@/hooks/usePost";
 import { useLogout } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -7,6 +8,7 @@ import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 const Home = () => {
   const { mutate: logout, isPending } = useLogout();
+  const {data} = getPost()
   return (
     <ScrollView>
       <View
@@ -35,15 +37,9 @@ const Home = () => {
       >
         <StoryBubble />
       </ScrollView>
-
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
+      {data?.map((item,index)=>(
+        <PostCard key={index} caption={item.caption} imageUrl={item.image_url} />
+      ))}
     </ScrollView>
   );
 };

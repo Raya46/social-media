@@ -6,7 +6,6 @@ const Register = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [email, setemail] = useState("");
-  const [profilePicture, setprofilePicture] = useState("");
   const { mutate: register } = useRegister();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -41,23 +40,13 @@ const Register = () => {
           marginBottom: 10,
         }}
       />
-      <Text>Profile Picture</Text>
-      <TextInput
-        onChangeText={(text) => setprofilePicture(text)}
-        style={{
-          borderColor: "black",
-          borderWidth: 1,
-          width: 200,
-          marginBottom: 10,
-        }}
-      />
+      
       <Button
         onPress={() =>
           register({
             email: email,
             password: password,
             username: username,
-            profile_url: profilePicture,
           })
         }
         title="register"

@@ -37,8 +37,8 @@ export const useLogin = () => {
 
 export const useRegister = () => {
     return useMutation({
-        mutationFn: async({email, username, password, profile_url}: 
-            {email:string, username:string, password:string, profile_url:string}) => {
+        mutationFn: async({email, username, password}: 
+            {email:string, username:string, password:string}) => {
             const {data,error} = await supabase.auth.signUp({
                 email:email,
                 password:password
@@ -49,7 +49,6 @@ export const useRegister = () => {
             const {data:userData, error:userError} = await supabase.from("users").insert({
                 email: data.user?.email,
                 username:username,
-                profile_url:profile_url
             })
             if(userError){
                 console.log(userError)

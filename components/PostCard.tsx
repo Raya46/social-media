@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
-const PostCard = () => {
+const PostCard = ({caption, imageUrl}:{caption:string, imageUrl:string}) => {
   return (
     <View style={{ flexDirection: "column" }}>
       <View
@@ -37,14 +37,17 @@ const PostCard = () => {
           style={{ marginTop: 23 }}
         />
       </View>
-      <View
+
+      {!imageUrl.includes("https") ? <View
         style={{
           backgroundColor: "grey",
           width: "100%",
           height: 300,
           marginTop: 10,
         }}
-      ></View>
+      ></View> :  <Image source={{uri:imageUrl,height:300,width:"100%"}}/>}
+     
+      
       <View
         style={{
           flexDirection: "row",
@@ -68,9 +71,7 @@ const PostCard = () => {
         }}
       >
         <Text>
-          <Text style={{ fontWeight: "bold" }}>user</Text> Loremdasdasdsa
-          dsadsadadas ipsum dolor sit amet
-          jdkalsdjaksdjaslkdjaskdljsadkljsadklsajdklasjdklasjdlk
+          <Text style={{ fontWeight: "bold" }}>user</Text> {caption}
         </Text>
       </View>
       <TouchableOpacity
