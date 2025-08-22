@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-const PostCard = ({caption, imageUrl}:{caption:string, imageUrl:string}) => {
+const PostCard = ({caption, imageUrl,username}:{username:string,caption:string, imageUrl:string}) => {
   return (
     <View style={{ flexDirection: "column" }}>
       <View
@@ -29,7 +29,7 @@ const PostCard = ({caption, imageUrl}:{caption:string, imageUrl:string}) => {
               backgroundColor: "black",
             }}
           ></View>
-          <Text>username</Text>
+          <Text>{username}</Text>
         </View>
         <Ionicons
           name="ellipsis-horizontal"
@@ -70,7 +70,7 @@ const PostCard = ({caption, imageUrl}:{caption:string, imageUrl:string}) => {
         }}
       >
         <Text>
-          <Text style={{ fontWeight: "bold" }}>user</Text> {caption}
+          <Text style={{ fontWeight: "bold" }}>{username}</Text> {caption}
         </Text>
       </View>
       <TouchableOpacity

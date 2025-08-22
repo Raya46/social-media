@@ -1,6 +1,6 @@
-import { useLocalSearchParams } from "expo-router"
+import { router, useLocalSearchParams } from "expo-router"
 import React, { useState } from 'react'
-import { ActivityIndicator, Button, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, Button, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { updatePost } from "../../hooks/usePost"
 
 const EditPost = () => {
@@ -10,6 +10,9 @@ const EditPost = () => {
     const {mutate:handleUpdatePost,isPending} = updatePost()
   return (
     <View>
+       <TouchableOpacity onPress={() => router.back()}>
+        <Text>{"<"}Back </Text>
+       </TouchableOpacity>
       <Text>Caption</Text>
       <TextInput style={{
         borderColor:"black",

@@ -7,7 +7,7 @@ export const getPost = () => {
     return useQuery({
         queryKey:["posts"],
         queryFn: async() => {
-            const {data,error} = await supabase.from("posts").select("*")
+            const {data,error} = await supabase.from("users").select("id,username,posts(id,caption,image_url)")
 
             if(error){
                 console.error(error)

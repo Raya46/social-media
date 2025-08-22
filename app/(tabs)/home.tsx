@@ -37,9 +37,15 @@ const Home = () => {
       >
         <StoryBubble />
       </ScrollView>
-      {data?.map((item,index)=>(
-        <PostCard key={index} caption={item.caption} imageUrl={item.image_url} />
-      ))}
+      {data?.map((item,index)=>{
+        const username = item.username
+        const posts = item.posts
+        return (
+          posts.map((post,i)=>(
+            <PostCard key={i} username={username} caption={post.caption} imageUrl={post.image_url} />
+          ))
+        )
+      })}
     </ScrollView>
   );
 };
